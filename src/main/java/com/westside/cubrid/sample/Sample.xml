@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+	<typeAlias alias="sample" type="com.westside.cubrid.sample.Sample"/>
+
+	<resultMap id="sampleResult" class="com.westside.cubrid.sample.Sample">
+		<result property="type" column="tp" />
+		<result property="name" column="nm" />
+	</resultMap>
+	
+	<sql id="columns">
+		tp, nm 
+	</sql>
+	
+	<sql id="tableName">
+		sample
+	</sql>
+	
+	
+	<select id="selectAll" resultMap="sampleResult">
+		SELECT <include refid="columns"/> FROM <include refid="tableName"/>
+	</select>
+	
+</sqlMap>

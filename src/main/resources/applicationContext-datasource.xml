@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- apicms db -->
+	<bean id="sampleDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name = "driverClassName" value="cubrid.jdbc.driver.CUBRIDDriver" />
+		<property name = "url" value="jdbc:cubrid:localhost:30000:demodb:::?althosts=localhost:30000&amp;charset=utf-8" />
+		<property name = "username" value="admin" />
+		<property name = "password" value="1234" />
+		<property name = "initialSize" value="5" />
+		<property name = "minIdle" value="5" />
+		<property name = "maxActive" value="20" />
+		<property name = "maxWait" value="3000" />
+	</bean>
+	
+	<bean id="sampleSqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean"> 
+	    <property name="configLocation" value="classpath:sql-map-config.xml"/> 
+	    <property name="dataSource" ref="sampleDataSource"/> 
+	</bean> 
+
+	<bean id="sampleSqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate"> 
+	    <property name="sqlMapClient" ref="sampleSqlMapClient"/> 
+	</bean> 
+
+</beans>
